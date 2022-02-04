@@ -48,3 +48,5 @@ package-lock.json
 
 #npm release config
 .npmrc
+docs/.DS_Store
+.DS_Store
