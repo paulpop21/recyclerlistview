@@ -67,14 +67,15 @@ export class WrapGridLayoutManager extends LayoutManager {
         return this._layouts;
     }
 
-    public getOffsetForIndex(index: number): Point {
-        if (this._layouts.length > index) {
+    public getOffsetForIndex(index: number): Point | null {
+        if (this._layouts.length > index && this._layouts[index]) {
             return { x: this._layouts[index].x, y: this._layouts[index].y };
         } else {
-            throw new CustomError({
-                message: "No layout available for index: " + index,
-                type: "LayoutUnavailableException",
-            });
+            return null;
+            // throw new CustomError({
+            //     message: "No layout available for index: " + index,
+            //     type: "LayoutUnavailableException",
+            // });
         }
     }
 
