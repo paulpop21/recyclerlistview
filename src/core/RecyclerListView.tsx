@@ -38,11 +38,11 @@ import ItemAnimator, { BaseItemAnimator } from "./ItemAnimator";
 import { DebugHandlers } from "..";
 import { ComponentCompat } from "../utils/ComponentCompat";
 //#if [REACT-NATIVE]
-import ScrollComponent from "../platform/reactnative/scrollcomponent/ScrollComponent";
-import ViewRenderer from "../platform/reactnative/viewrenderer/ViewRenderer";
-import { DefaultJSItemAnimator as DefaultItemAnimator } from "../platform/reactnative/itemanimators/defaultjsanimator/DefaultJSItemAnimator";
-import { Platform } from "react-native";
-const IS_WEB = !Platform || Platform.OS === "web";
+//import ScrollComponent from "../platform/reactnative/scrollcomponent/ScrollComponent";
+//import ViewRenderer from "../platform/reactnative/viewrenderer/ViewRenderer";
+//import { DefaultJSItemAnimator as DefaultItemAnimator } from "../platform/reactnative/itemanimators/defaultjsanimator/DefaultJSItemAnimator";
+//import { Platform } from "react-native";
+//const IS_WEB = !Platform || Platform.OS === "web";
 //#endif
 
 /***
@@ -50,10 +50,10 @@ const IS_WEB = !Platform || Platform.OS === "web";
  */
 
 //#if [WEB]
-//import ScrollComponent from "../platform/web/scrollcomponent/ScrollComponent";
-//import ViewRenderer from "../platform/web/viewrenderer/ViewRenderer";
-//import { DefaultWebItemAnimator as DefaultItemAnimator } from "../platform/web/itemanimators/DefaultWebItemAnimator";
-//const IS_WEB = true;
+import ScrollComponent from "../platform/web/scrollcomponent/ScrollComponent";
+import ViewRenderer from "../platform/web/viewrenderer/ViewRenderer";
+import { DefaultWebItemAnimator as DefaultItemAnimator } from "../platform/web/itemanimators/DefaultWebItemAnimator";
+const IS_WEB = true;
 //#endif
 
 /***
@@ -243,7 +243,7 @@ export default class RecyclerListView<P extends RecyclerListViewProps, S extends
         const layoutManager = this._virtualRenderer.getLayoutManager();
         if (layoutManager) {
             const offsets = layoutManager.getOffsetForIndex(index);
-            this.scrollToOffset(offsets.x, offsets.y, animate);
+            if (!!offsets) this.scrollToOffset(offsets.x, offsets.y, animate);
         } else {
             console.warn(Messages.WARN_SCROLL_TO_INDEX); //tslint:disable-line
         }
