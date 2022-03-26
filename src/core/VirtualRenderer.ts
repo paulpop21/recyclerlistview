@@ -143,8 +143,10 @@ export default class VirtualRenderer {
             if (this._layoutManager && this._params) {
                 firstVisibleIndex = Math.min(this._params.itemCount - 1, firstVisibleIndex);
                 const point = this._layoutManager.getOffsetForIndex(firstVisibleIndex);
-                if (!!point) this._scrollOnNextUpdate(point);
-                if (!!point) offset = this._params.isHorizontal ? point.x : point.y;
+                if (!!point) {
+                    this._scrollOnNextUpdate(point);
+                    offset = this._params.isHorizontal ? point.x : point.y;
+                }
             }
             this._viewabilityTracker.forceRefreshWithOffset(offset);
         }
