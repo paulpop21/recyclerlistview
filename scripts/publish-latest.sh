@@ -8,7 +8,7 @@ npm run clean
 npm run build
 
 echo "Pushing out LATEST build..."
-npm publish
+npm publish --access public
 
 echo "PUSH SUCCESS"
 fi
